@@ -16,10 +16,16 @@ Including another URLconf
 from django.conf.urls import include, url
 from django.contrib import admin
 from django.views.generic import TemplateView
+from quotes.views import Register
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^testpage$', TemplateView.as_view(template_name="pages/page.html")),
+    url(r'^register/success/$',
+        TemplateView.as_view(template_name="registration/success.html"),
+        name='register-success'),
+    url(r'^register/$', Register.as_view(), name='register'),
     url(r'^quote', include('quotes.urls')),
+    url(r'^', include('django.contrib.auth.urls')),
     url(r'^', include('pages.urls')),
 ]

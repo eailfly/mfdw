@@ -34,11 +34,14 @@ def contact(request):
                 cd['message'],
                 cd.get('email', 'noreplay@example.org'),
                 ['siteowner@example.org'],
-                connection=con
-            )
+                connection=con)
             return HttpResponseRedirect('/contact?submitted=True')
     else:
         form = ContactForm()
         if 'submitted' in request.GET:
             submitted = True
-    return render(request, 'pages/contact.html', {'form': form, 'page_list': Page.objects.all(), 'submitted': submitted})
+    return render(request, 'pages/contact.html', {
+        'form': form,
+        'page_list': Page.objects.all(),
+        'submitted': submitted
+    })
